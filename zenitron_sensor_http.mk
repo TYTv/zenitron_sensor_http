@@ -37,3 +37,25 @@ $(NAME)_SOURCES    += HTS221.c \
                       LIS2DH12.c \
                       KX122.c \
                       ICM20602.c
+
+#------ add http ------
+$(NAME)_SOURCES    += HTTP.c
+
+$(NAME)_RESOURCES  += apps/http_server_sent_events/main.html \
+                      images/cypresslogo.png \
+                      images/cypresslogo_line.png \
+                      images/favicon.ico
+
+WIFI_CONFIG_DCT_H  := wifi_config_dct.h
+
+$(NAME)_COMPONENTS += daemons/HTTP_server \
+                      protocols/SNTP
+
+ifeq ($(PLATFORM),$(filter $(PLATFORM), CYW9MCU7X9N364))
+GLOBAL_DEFINES     += WICED_DISABLE_TLS
+endif
+
+#------ add json ------
+$(NAME)_SOURCES    += JSON_CMD.c \
+                      frozen.c
+

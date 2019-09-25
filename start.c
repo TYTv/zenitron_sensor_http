@@ -45,7 +45,7 @@ static char history_buffer_storage[MAX_LINE_LENGTH * MAX_HISTORY_LENGTH];
 { "lis2dh12",  lis2dh12_get,  0, NULL, NULL,"",  "get LIS2DH12 accelerometer" }, \
 { "kx122",  kx122_get,  0, NULL, NULL,"",  "get KX122 accelerometer" }, \
 { "icm20602",  icm20602_get,  0, NULL, NULL,"",  "get ICM20602 accelerometer" }, \
-
+{ "json_parser",  json_parser,  0, NULL, NULL,"",  "json data parser" }, \
 
 /******************************************************
  *               Function Definitions
@@ -64,6 +64,9 @@ void application_start( void )
 
     /* Initialize the device */
     wiced_core_init( );
+
+    /* init http */
+    http_start();
 
     /* probe for temperature device */
     hts221_init();
