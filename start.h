@@ -3,6 +3,18 @@
 #include "xively.h"
 #include <math.h>
 
+#include "wiced.h"
+#include "resources.h"
+//#include "sntp.h"
+#include "command_console.h"
+#include "wiced_management.h"
+#include "command_console_ping.h"
+
+#include "HTS221.h"
+#include "LIS2DH12.h"
+#include "KX122.h"
+#include "ICM20602.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -11,6 +23,7 @@ extern "C" {
 /******************************************************
  *                     Macros
  ******************************************************/
+#define NUM_I2C_MESSAGE_RETRIES   (3)
 
 /******************************************************
  *                    Constants
