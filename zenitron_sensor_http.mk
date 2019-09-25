@@ -1,6 +1,6 @@
-NAME := App_snip_I2C
+NAME := App_work_zenitron_sensor_http
 
-$(NAME)_SOURCES    := I2C.c
+$(NAME)_SOURCES    := start.c
 
 $(NAME)_COMPONENTS := daemons/HTTP_server \
                       daemons/device_configuration \
@@ -23,5 +23,8 @@ $(NAME)_RESOURCES  := apps/temp_control/main.html \
 
 GLOBAL_DEFINES     := USE_SELF_SIGNED_TLS_CERT
 
-
 VALID_PLATFORMS    := Quicksilver*
+
+#------ add AzureWave platform ------
+VALID_PLATFORMS    += AWCU*
+
