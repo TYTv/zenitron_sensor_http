@@ -21,7 +21,6 @@ uint32_t asc2dec( char *asc, uint32_t *dec ){
 
 }
 
-
 int json_parser(int argc, char *argv[])
 {
     //    json_parser {"BM1383GLV(hPa)":1017,"BD7411_Detect":false,"ML8511A_UV(mW/cm2)":0,"BD1020_Temp(degC)":22}
@@ -69,6 +68,7 @@ int json_parser(int argc, char *argv[])
         sprintf( tmp, "[%.*s] %.*s\t", json_data[sn].key[i].len, json_data[sn].key[i].ptr, json_data[sn].val[i].len, json_data[sn].val[i].ptr );
         strcat( json_data[sn].list, tmp );
     }
+
 //    printf("%s",json_data[sn].list);
 
 

@@ -187,7 +187,7 @@ static wiced_result_t send_event( void* arg )
     }
 
     /* SSE is prefixed with "data: " */
-    WICED_VERIFY( wiced_http_response_stream_write( http_event_stream, (const void*)EVENT_STREAM_DATA, sizeof( EVENT_STREAM_DATA ) - 1 ) );
+//    WICED_VERIFY( wiced_http_response_stream_write( http_event_stream, (const void*)EVENT_STREAM_DATA, sizeof( EVENT_STREAM_DATA ) - 1 ) );
 
     /* Send current time back to the client */
 //    wiced_time_get_iso8601_time( &current_time );
@@ -197,42 +197,19 @@ static wiced_result_t send_event( void* arg )
 //    kx122_get(NULL,NULL);   // update g sensor data
 //    WICED_VERIFY( wiced_http_response_stream_write( http_event_stream, (const void*)&kx122_data, sizeof( kx122_data ) ) );
 
-    // ------ json command data ------
-//    static int j=0;
-////    for( ; j<toknum ; j++ ){
-//        char disp[1000] = "";
-//        for( int i=0; i<datnum ; i++ ){
-//            if( json_data[j].key[i].len != 0 ){
-//                char tmp[50] = "";
-//                sprintf(tmp, "[%.*s] %.*s\t", json_data[j].key[i].len, json_data[j].key[i].ptr, json_data[j].val[i].len, json_data[j].val[i].ptr);
-//                strcat(disp, tmp);
-//            }
-//        }
-//        WICED_VERIFY( wiced_http_response_stream_write( http_event_stream, (const void*)&disp, sizeof( disp ) ) );
-////    }
-//    j++;
-//    if(j>=toknum){
-//        j=0;
-//    }
-
-    static uint32_t i = 0;
-    uint32_t o = i;
-    while(1){
-        i++;
-        if(i>=toknum){
-            i=0;
-        }
-        if(i==o){
-            break;
-        }
-        if( strlen(json_data[i].list) != 0 ){
-            break;
+    for(uint32_t i=0;i<datnum;i++){
+        if( strlen( json_data[i].list ) > 0 ){
+            /* SSE is prefixed with "data: " */
+            WICED_VERIFY( wiced_http_response_stream_write( http_event_stream, (const void*)EVENT_STREAM_DATA, sizeof( EVENT_STREAM_DATA ) - 1 ) );
+            /* json command data */
+            WICED_VERIFY( wiced_http_response_stream_write( http_event_stream, (const void*)&json_data[i].list, strlen( json_data[i].list ) ) );
+            /* SSE is ended with two line feeds */
+            WICED_VERIFY( wiced_http_response_stream_write( http_event_stream, (const void*)LFLF, sizeof( LFLF ) - 1 ) );
         }
     }
-    WICED_VERIFY( wiced_http_response_stream_write( http_event_stream, (const void*)&json_data[i].list, sizeof( json_data[i].list ) ) );
 
-
-
+    /* SSE is prefixed with "data: " */
+    WICED_VERIFY( wiced_http_response_stream_write( http_event_stream, (const void*)EVENT_STREAM_DATA, sizeof( EVENT_STREAM_DATA ) - 1 ) );
     /* SSE is ended with two line feeds */
     WICED_VERIFY( wiced_http_response_stream_write( http_event_stream, (const void*)LFLF, sizeof( LFLF ) - 1 ) );
     WICED_VERIFY( wiced_http_response_stream_flush( http_event_stream ) );

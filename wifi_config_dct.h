@@ -58,8 +58,8 @@ extern "C" {
 #define CONFIG_AP_VALID      WICED_FALSE
 
 /* This is the soft AP available for normal operation */
-#define SOFT_AP_SSID         "WICED Soft AP"
-#define SOFT_AP_PASSPHRASE   "abcd1234"
+#define SOFT_AP_SSID         "Zenitron IoT"
+#define SOFT_AP_PASSPHRASE   "12345678"
 #define SOFT_AP_SECURITY     WICED_SECURITY_WPA2_AES_PSK
 #define SOFT_AP_CHANNEL      1
 
