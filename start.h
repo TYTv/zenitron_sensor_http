@@ -15,7 +15,7 @@
 #include "KX122.h"
 #include "ICM20602.h"
 
-#include "HTTP.h"
+#include "WEB.h"
 #include "JSON_CMD.h"
 
 #ifdef __cplusplus

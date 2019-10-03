@@ -39,13 +39,22 @@ $(NAME)_SOURCES    += HTS221.c \
                       ICM20602.c
 
 #------ add http ------
-$(NAME)_SOURCES    += HTTP.c
-
-$(NAME)_RESOURCES  += apps/http_server_sent_events/main.html \
-                      images/cypresslogo.png \
-                      images/cypresslogo_line.png \
-                      images/favicon.ico
-
+$(NAME)_SOURCES    += WEB.c
+                      
+$(NAME)_RESOURCES  += apps/res/index.html \
+                      apps/res/cypress.jpg \
+                      apps/res/line.png \
+                      apps/res/favicon.ico \
+                      apps/res/jquery-1.8.3.min.js \
+                      apps/res/jquery.flot.min.js \
+                      apps/res/zenitron.gif \
+                      apps/res/rohm.jpg \
+                      apps/res/azurewave.png \
+                      apps/res/microchip.png \
+                      apps/res/top.html \
+                      apps/res/table.html \
+                      apps/res/ping.html \
+                      
 WIFI_CONFIG_DCT_H  := wifi_config_dct.h
 
 $(NAME)_COMPONENTS += daemons/HTTP_server \

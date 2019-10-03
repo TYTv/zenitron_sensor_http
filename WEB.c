@@ -74,7 +74,7 @@
 #include "resources.h"
 #include "sntp.h"
 
-#include "HTTP.h"
+#include "WEB.h"
 
 /******************************************************
  *                      Macros
@@ -116,13 +116,18 @@ static int32_t        process_page( const char* url_path, const char* url_parame
 static wiced_http_server_t http_server;
 
 START_OF_HTTP_PAGE_DATABASE(web_pages)
-    ROOT_HTTP_PAGE_REDIRECT("/main.html"),
-    { "/main.html",                     "text/html",                WICED_RESOURCE_URL_CONTENT,    .url_content.resource_data = &resources_apps_DIR_http_server_sent_events_DIR_main_html   },
-    { "/images/favicon.ico",            "image/vnd.microsoft.icon", WICED_RESOURCE_URL_CONTENT,    .url_content.resource_data = &resources_images_DIR_favicon_ico,                          },
-    { "/images/cypresslogo.png",        "image/png",                WICED_RESOURCE_URL_CONTENT,    .url_content.resource_data = &resources_images_DIR_cypresslogo_png,                      },
-    { "/images/cypresslogo_line.png",   "image/png",                WICED_RESOURCE_URL_CONTENT,    .url_content.resource_data = &resources_images_DIR_cypresslogo_line_png,                 },
+    ROOT_HTTP_PAGE_REDIRECT("/index.html"),
+    { "/index.html",                    "text/html",                WICED_RESOURCE_URL_CONTENT,    .url_content.resource_data = &resources_apps_DIR_res_DIR_index_html                      },
+    { "/favicon.ico",                   "image/vnd.microsoft.icon", WICED_RESOURCE_URL_CONTENT,    .url_content.resource_data = &resources_apps_DIR_res_DIR_favicon_ico,                    },
+    { "/cypress.jpg",                   "image/jpg",                WICED_RESOURCE_URL_CONTENT,    .url_content.resource_data = &resources_apps_DIR_res_DIR_cypress_jpg,                    },
+    { "/line.png",                      "image/png",                WICED_RESOURCE_URL_CONTENT,    .url_content.resource_data = &resources_apps_DIR_res_DIR_line_png,                       },
     { "/events",                        "text/event-stream",        WICED_RAW_DYNAMIC_URL_CONTENT, .url_content.dynamic_data  = { process_page, 0 },                                        },
-
+    { "/jquery-1.8.3.min.js",           "application/javascript",   WICED_RESOURCE_URL_CONTENT,    .url_content.resource_data = &resources_apps_DIR_res_DIR_jquery_1_8_3_min_js,            },
+    { "/jquery.flot.min.js",            "application/javascript",   WICED_RESOURCE_URL_CONTENT,    .url_content.resource_data = &resources_apps_DIR_res_DIR_jquery_flot_min_js,             },
+    { "/zenitron.gif",                  "image/gif",                WICED_RESOURCE_URL_CONTENT,    .url_content.resource_data = &resources_apps_DIR_res_DIR_zenitron_gif,                   },
+    { "/rohm.jpg",                      "image/jpg",                WICED_RESOURCE_URL_CONTENT,    .url_content.resource_data = &resources_apps_DIR_res_DIR_rohm_jpg,                       },
+    { "/azurewave.png",                 "image/png",                WICED_RESOURCE_URL_CONTENT,    .url_content.resource_data = &resources_apps_DIR_res_DIR_azurewave_png,                  },
+    { "/microchip.png",                 "image/png",                WICED_RESOURCE_URL_CONTENT,    .url_content.resource_data = &resources_apps_DIR_res_DIR_microchip_png,                  },
 END_OF_HTTP_PAGE_DATABASE();
 
 static wiced_http_response_stream_t* http_event_stream = NULL;
